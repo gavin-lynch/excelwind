@@ -1,0 +1,47 @@
+{
+  "name": "@workspace/excelwind",
+  "version": "0.0.1",
+  "description": "JSX-based Excel generator with Tailwind-style styling",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/jsx-runtime/jsx-runtime.d.ts",
+      "default": "./dist/jsx-runtime/jsx-runtime.js"
+    },
+    "./jsx-dev-runtime": {
+      "types": "./dist/jsx-runtime/jsx-dev-runtime.d.ts",
+      "default": "./dist/jsx-runtime/jsx-dev-runtime.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown -p tsconfig.json src/index.ts src/jsx-runtime/jsx-runtime.ts src/jsx-runtime/jsx-dev-runtime.ts",
+    "lint": "bunx --bun biome lint",
+    "lint:fix": "bunx --bun biome lint --write",
+    "format": "bunx --bun biome format --write",
+    "examples": "bun run examples/run-all.ts",
+    "example:basic": "bun run examples/01-basic.tsx",
+    "example:styling": "bun run examples/02-styling.tsx",
+    "example:dynamic": "bun run examples/03-dynamic-data.tsx",
+    "example:processors": "bun run examples/04-processors.tsx",
+    "example:merged": "bun run examples/05-merged-cells.tsx",
+    "example:templates": "bun run examples/06-templates.tsx",
+    "example:images": "bun run examples/07-images.tsx"
+  },
+  "dependencies": {
+    "@types/culori": "^4.0.0",
+    "@types/tailwindcss": "^3.1.0",
+    "culori": "^4.0.1",
+    "exceljs": "^4.3.0",
+    "tailwindcss": "^4.1.10"
+  },
+  "devDependencies": {
+    "tsdown": "^0.13.0",
+    "typescript": "^5.0.0"
+  }
+}
