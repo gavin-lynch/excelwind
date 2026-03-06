@@ -17,7 +17,6 @@ import {
   Image,
   Template,
   render,
-  tailwindExcel,
   mergeDeep,
   isRow,
   type Processor,
@@ -45,36 +44,36 @@ const workbook = await render(
       <Column width={14} />
 
       <Row height={28}>
-        <Cell value="Excelwind Report" colSpan={3} style={tailwindExcel("font-bold text-xl text-center bg-blue-600 text-white")} />
+        <Cell value="Excelwind Report" colSpan={3} className="font-bold text-xl text-center bg-blue-600 text-white" />
       </Row>
 
       <Row>
-        <Cell value="Region" style={tailwindExcel("font-bold bg-gray-100")} />
-        <Cell value="Revenue" style={tailwindExcel("font-bold bg-gray-100 text-right")} />
-        <Cell value="YoY" style={tailwindExcel("font-bold bg-gray-100 text-center")} />
+        <Cell value="Region" className="font-bold bg-gray-100" />
+        <Cell value="Revenue" className="font-bold bg-gray-100 text-right" />
+        <Cell value="YoY" className="font-bold bg-gray-100 text-center" />
       </Row>
 
       <Group processor={zebraStripe}>
         <Row>
           <Cell value="North" />
           <Cell value={12500} />
-          <Cell value="+8%" style={tailwindExcel("text-center")} />
+          <Cell value="+8%" className="text-center" />
         </Row>
         <Row>
           <Cell value="South" />
           <Cell value={9800} />
-          <Cell value="-2%" style={tailwindExcel("text-center")} />
+          <Cell value="-2%" className="text-center" />
         </Row>
         <Row>
           <Cell value="West" />
           <Cell value={15300} />
-          <Cell value="+12%" style={tailwindExcel("text-center")} />
+          <Cell value="+12%" className="text-center" />
         </Row>
       </Group>
 
       <Row>
-        <Cell value="Total" style={tailwindExcel("font-bold")} />
-        <Cell formula="SUM(B3:B5)" value={37600} style={tailwindExcel("font-bold text-right")} />
+        <Cell value="Total" className="font-bold" />
+        <Cell formula="SUM(B3:B5)" value={37600} className="font-bold text-right" />
         <Cell />
       </Row>
 

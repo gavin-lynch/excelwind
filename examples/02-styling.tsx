@@ -2,7 +2,7 @@
  * Styling Example - Tailwind-style Classes for Excel
  *
  * This example demonstrates how to style your spreadsheets using
- * Tailwind-inspired class names with the `tailwindExcel` utility.
+ * Tailwind-inspired class names via the `className` prop.
  *
  * Supported styles include:
  * - Colors: bg-{color}-{shade}, text-{color}-{shade}
@@ -16,7 +16,6 @@
 
 import { Workbook, Worksheet, Row, Cell, Column, Group } from "../src/components";
 import { renderToWorkbook as render } from "../src/renderRows";
-import { tailwindExcel } from "../src/tailwind";
 import { writeFile } from "fs/promises";
 
 const workbook = (
@@ -34,13 +33,13 @@ const workbook = (
         <Cell
           value="Q4 Sales Report"
           colSpan={5}
-          style={tailwindExcel("font-bold text-2xl text-center align-center bg-blue-600 text-white")}
+          className="font-bold text-2xl text-center align-center bg-blue-600 text-white"
         />
       </Row>
 
       {/* Header Row */}
       <Row height={30}>
-        <Group style={tailwindExcel("font-bold text-white bg-gray-700 text-center align-center border-b border-gray-400")}>
+        <Group className="font-bold text-white bg-gray-700 text-center align-center border-b border-gray-400">
           <Cell value="Region" />
           <Cell value="Sales Rep" />
           <Cell value="Product" />
@@ -51,38 +50,38 @@ const workbook = (
 
       {/* Data Rows with alternating styles */}
       <Row>
-        <Cell value="North" style={tailwindExcel("text-left")} />
+        <Cell value="North" className="text-left" />
         <Cell value="Alice Johnson" />
         <Cell value="Enterprise" />
-        <Cell value={125000} style={tailwindExcel("text-right")} />
-        <Cell value="Closed" style={tailwindExcel("bg-green-100 text-green-800 text-center font-bold")} />
+        <Cell value={125000} className="text-right" />
+        <Cell value="Closed" className="bg-green-100 text-green-800 text-center font-bold" />
       </Row>
 
       <Row>
-        <Group style={tailwindExcel("bg-gray-50")}>
-          <Cell value="South" style={tailwindExcel("text-left")} />
+        <Group className="bg-gray-50">
+          <Cell value="South" className="text-left" />
           <Cell value="Bob Smith" />
           <Cell value="Starter" />
-          <Cell value={45000} style={tailwindExcel("text-right")} />
-          <Cell value="Pending" style={tailwindExcel("bg-yellow-100 text-yellow-800 text-center font-bold")} />
+          <Cell value={45000} className="text-right" />
+          <Cell value="Pending" className="bg-yellow-100 text-yellow-800 text-center font-bold" />
         </Group>
       </Row>
 
       <Row>
-        <Cell value="East" style={tailwindExcel("text-left")} />
+        <Cell value="East" className="text-left" />
         <Cell value="Carol Davis" />
         <Cell value="Pro" />
-        <Cell value={89000} style={tailwindExcel("text-right")} />
-        <Cell value="Closed" style={tailwindExcel("bg-green-100 text-green-800 text-center font-bold")} />
+        <Cell value={89000} className="text-right" />
+        <Cell value="Closed" className="bg-green-100 text-green-800 text-center font-bold" />
       </Row>
 
       <Row>
-        <Group style={tailwindExcel("bg-gray-50")}>
-          <Cell value="West" style={tailwindExcel("text-left")} />
+        <Group className="bg-gray-50">
+          <Cell value="West" className="text-left" />
           <Cell value="Dan Wilson" />
           <Cell value="Enterprise" />
-          <Cell value={210000} style={tailwindExcel("text-right")} />
-          <Cell value="Lost" style={tailwindExcel("bg-red-100 text-red-800 text-center font-bold")} />
+          <Cell value={210000} className="text-right" />
+          <Cell value="Lost" className="bg-red-100 text-red-800 text-center font-bold" />
         </Group>
       </Row>
 
@@ -90,10 +89,10 @@ const workbook = (
       <Row height={35}>
         <Cell value="" />
         <Cell value="" />
-        <Cell value="TOTAL" style={tailwindExcel("font-bold text-right")} />
+        <Cell value="TOTAL" className="font-bold text-right" />
         <Cell
           value={469000}
-          style={tailwindExcel("font-bold text-right bg-blue-100 border border-blue-500")}
+          className="font-bold text-right bg-blue-100 border border-blue-500"
         />
         <Cell value="" />
       </Row>
@@ -103,7 +102,7 @@ const workbook = (
         <Cell
           value="Border Styles Demo"
           colSpan={5}
-          style={tailwindExcel("text-center border-x border-y border-thick border-blue-800 bg-blue-200")}
+          className="text-center border-x border-y border-thick border-blue-800 bg-blue-200"
         />
       </Row>
     </Worksheet>

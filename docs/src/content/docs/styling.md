@@ -3,12 +3,13 @@ title: Styling
 description: Tailwind-style utility classes for Excel styles.
 ---
 
-Use `tailwindExcel` to convert utility classes into ExcelJS style objects.
+Use `className` as the canonical way to style elements. The `excelwindClasses` utility is available for manual conversions.
 
 ```tsx
-import { tailwindExcel } from "@workspace/excelwind";
+import { excelwindClasses } from "@workspace/excelwind";
 
-<Cell value="Total" style={tailwindExcel("font-bold bg-blue-600 text-white text-right")} />
+<Cell value="Total" className="font-bold bg-blue-600 text-white text-right" />
+<Cell value="Total" style={excelwindClasses("font-bold bg-blue-600 text-white text-right")} />
 ```
 
 ## Background colors
@@ -16,8 +17,8 @@ Use `bg-{color}-{shade}` to set the cell fill. Colors come from Tailwind’s pal
 
 Examples:
 ```tsx
-tailwindExcel("bg-blue-600")
-tailwindExcel("bg-slate-200")
+excelwindClasses("bg-blue-600")
+excelwindClasses("bg-slate-200")
 ```
 
 Notes:
@@ -30,8 +31,8 @@ Use `text-{color}-{shade}` to set `font.color`.
 
 Examples:
 ```tsx
-tailwindExcel("text-white")
-tailwindExcel("text-emerald-700")
+excelwindClasses("text-white")
+excelwindClasses("text-emerald-700")
 ```
 
 Default behavior:
@@ -92,9 +93,9 @@ Borders are composed from multiple classes:
 
 Examples:
 ```tsx
-tailwindExcel("border border-gray-300")
-tailwindExcel("border-b border-dashed border-amber-600")
-tailwindExcel("border-x border-thick")
+excelwindClasses("border border-gray-300")
+excelwindClasses("border-b border-dashed border-amber-600")
+excelwindClasses("border-x border-thick")
 ```
 
 Notes:
@@ -110,8 +111,8 @@ Notes:
 Styles are merged in this order: column -> group -> row -> cell.
 
 ## Related topics
-- Properties: what `tailwindExcel` can set
+- Properties: what `excelwindClasses` can set
 - Format: number/date formatting
 - Formula: cell formulas and cached values
 
-Note: Formatting and formulas are handled by ExcelJS and Excel itself. `tailwindExcel` only maps style properties and does not interpret format strings or formulas.
+Note: Formatting and formulas are handled by ExcelJS and Excel itself. `excelwindClasses` only maps style properties and does not interpret format strings or formulas.

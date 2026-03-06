@@ -1,5 +1,6 @@
 import ExcelJS from 'exceljs';
 import { mergeDeep } from './utils';
+import { excelwindClasses } from './tailwind';
 import { validateTree } from './validate';
 import {
   type AnyNode,
@@ -36,6 +37,11 @@ interface RenderContext {
   groupFormat?: string;
 }
 
+function classNameToStyle(className?: string) {
+  if (!className) return undefined;
+  return excelwindClasses(className);
+}
+
 function renderRow(rowNode: RowNode, context: RenderContext) {
   const {
     sheet,
@@ -58,7 +64,8 @@ function renderRow(rowNode: RowNode, context: RenderContext) {
   });
 
   const { props } = processedRowNode;
-  const initialStyle = mergeDeep(...context.styles, props.style);
+  const rowClassStyle = classNameToStyle(props.className);
+  const initialStyle = mergeDeep(...context.styles, rowClassStyle, props.style);
 
   // Phase 1: Flatten the component tree to get a simple array of cells with inherited styles.
   const allCells: { node: CellNode; groupFormat?: string }[] = [];
@@ -69,20 +76,22 @@ function renderRow(rowNode: RowNode, context: RenderContext) {
   ) {
     if (!children) return;
     const childrenArray = Array.isArray(children) ? children : [children];
-    childrenArray.forEach((child) => {
-      if (!child || !('type' in child)) return;
-      if (isGroup(child)) {
-        const groupStyle = mergeDeep(inheritedStyle, child.props.style);
-        const groupFormat = child.props.format || inheritedFormat;
-        flatten(child.props.children, groupStyle, groupFormat);
-      } else if (isCell(child)) {
-        const finalCellStyle = mergeDeep(inheritedStyle, child.props.style);
-        allCells.push({
-          node: { ...child, props: { ...child.props, style: finalCellStyle } },
-          groupFormat: inheritedFormat,
-        });
-      }
-    });
+      childrenArray.forEach((child) => {
+        if (!child || !('type' in child)) return;
+        if (isGroup(child)) {
+          const groupClassStyle = classNameToStyle(child.props.className);
+          const groupStyle = mergeDeep(inheritedStyle, groupClassStyle, child.props.style);
+          const groupFormat = child.props.format || inheritedFormat;
+          flatten(child.props.children, groupStyle, groupFormat);
+        } else if (isCell(child)) {
+          const cellClassStyle = classNameToStyle(child.props.className);
+          const finalCellStyle = mergeDeep(inheritedStyle, cellClassStyle, child.props.style);
+          allCells.push({
+            node: { ...child, props: { ...child.props, style: finalCellStyle } },
+            groupFormat: inheritedFormat,
+          });
+        }
+      });
   }
 
   if ('children' in props) {
@@ -365,7 +374,11 @@ function render(node: AnyNode | AnyNode[] | undefined, context: RenderContext) {
         // Recursively search within groups for rows
         const groupContext: RenderContext = {
           ...currentContext,
-          styles: [...currentContext.styles, n.props.style].filter(Boolean) as ExcelJS.Style[],
+          styles: [
+            ...currentContext.styles,
+            classNameToStyle(n.props.className),
+            n.props.style,
+          ].filter(Boolean) as ExcelJS.Style[],
           processors: [...currentContext.processors, n.props.processor].filter(
             (p): p is Processor => !!p,
           ),
@@ -412,7 +425,9 @@ function render(node: AnyNode | AnyNode[] | undefined, context: RenderContext) {
         (child): child is ColumnNode => !!child && isColumn(child),
       );
       const columnFormats = columnNodes.map((col: ColumnNode) => col.props.format);
-      const columnStyles = columnNodes.map((col: ColumnNode) => col.props.style);
+      const columnStyles = columnNodes.map((col: ColumnNode) =>
+        mergeDeep(classNameToStyle(col.props.className), col.props.style),
+      );
       const sheet = context.workbook.addWorksheet(child.props.name, {
         properties: child.props.properties,
       });

@@ -19,6 +19,7 @@ export interface WorksheetProps {
 
 interface RenderProps {
   style?: Partial<Style>;
+  className?: string;
   formula?: string;
   format?: string;
 }

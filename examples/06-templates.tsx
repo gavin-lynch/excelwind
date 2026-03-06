@@ -16,7 +16,6 @@
 
 import { Workbook, Worksheet, Row, Cell, Column, Template, Group } from "../src/components";
 import { renderToWorkbook as render } from "../src/renderRows";
-import { tailwindExcel } from "../src/tailwind";
 import { writeFile } from "fs/promises";
 
 // Sample invoice data
@@ -107,7 +106,7 @@ const workbook = (
 
       {/* You can add more content after the template */}
       <Row height={30}>
-        <Group style={tailwindExcel("font-bold text-center bg-gray-100")}>
+        <Group className="font-bold text-center bg-gray-100">
           <Cell value="Additional Notes" colSpan={6} />
         </Group>
       </Row>
@@ -116,7 +115,7 @@ const workbook = (
         <Cell
           value="Thank you for your business! Payment is due within 30 days."
           colSpan={6}
-          style={tailwindExcel("text-center align-center")}
+          className="text-center align-center"
         />
       </Row>
     </Worksheet>

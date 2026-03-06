@@ -3,7 +3,7 @@ title: Format
 description: Number and date formatting for cells and columns.
 ---
 
-Number/date formatting is not handled by `tailwindExcel`. Use the `format` prop on `<Cell>` or `<Column>`.
+Number/date formatting is not handled by `excelwindClasses`. Use the `format` prop on `<Cell>` or `<Column>`.
 
 ```tsx
 <Column format='"$"#,##0.00' />

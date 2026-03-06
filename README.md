@@ -24,14 +24,13 @@ bun add @workspace/excelwind
 /** @jsxImportSource @workspace/excelwind */
 import { Workbook, Worksheet, Row, Cell } from "@workspace/excelwind";
 import { render } from "@workspace/excelwind";
-import { tailwindExcel } from "@workspace/excelwind";
 
 const spreadsheet = (
   <Workbook>
     <Worksheet name="Sales">
       <Row>
-        <Cell value="Product" style={tailwindExcel("font-bold bg-blue-600 text-white")} />
-        <Cell value="Revenue" style={tailwindExcel("font-bold bg-blue-600 text-white")} />
+        <Cell value="Product" className="font-bold bg-blue-600 text-white" />
+        <Cell value="Revenue" className="font-bold bg-blue-600 text-white" />
       </Row>
       <Row>
         <Cell value="Widget Pro" />
@@ -75,27 +74,43 @@ bun install --cwd docs
 bun run docs:dev
 ```
 
+## 🧹 Linting and Formatting
+
+```bash
+bun run lint
+bun run lint:fix
+bun run format
+```
+
 ## 🎨 Styling with Tailwind Classes
 
-Use the `tailwindExcel()` utility to convert Tailwind-style classes to Excel styles:
+Use the `className` prop as the canonical styling API. For ad-hoc conversions, you can also call `excelwindClasses()` directly.
+
+### Canonical usage
+```tsx
+<Cell value="Total" className="font-bold bg-blue-600 text-white text-right" />
+```
+
+### Utility usage
+Use the `excelwindClasses()` utility to convert Tailwind-style classes to Excel styles:
 
 ```tsx
-import { tailwindExcel } from "@workspace/excelwind";
+import { excelwindClasses } from "@workspace/excelwind";
 
 // Colors
-tailwindExcel("bg-blue-500 text-white")
+excelwindClasses("bg-blue-500 text-white")
 
 // Typography
-tailwindExcel("font-bold text-lg text-center")
+excelwindClasses("font-bold text-lg text-center")
 
 // Borders
-tailwindExcel("border border-gray-300 border-thick")
+excelwindClasses("border border-gray-300 border-thick")
 
 // Alignment
-tailwindExcel("text-left align-center")
+excelwindClasses("text-left align-center")
 
 // Combined
-tailwindExcel("font-bold bg-indigo-600 text-white text-center border-b")
+excelwindClasses("font-bold bg-indigo-600 text-white text-center border-b")
 ```
 
 ### Supported Classes
@@ -127,7 +142,7 @@ A sheet within the workbook.
 Define column properties.
 
 ```tsx
-<Column width={20} format='"$"#,##0.00' style={tailwindExcel("text-right")} />
+<Column width={20} format='"$"#,##0.00' className="text-right" />
 <Column id="Dates" width={15} format="yyyy-mm-dd" />
 ```
 
@@ -155,7 +170,7 @@ Individual cell with value and styling.
 Group cells/rows for shared styling or processing.
 
 ```tsx
-<Group style={tailwindExcel("bg-gray-100")} processor={zebraStripeProcessor}>
+<Group className="bg-gray-100" processor={zebraStripeProcessor}>
   {rows.map(row => <Row>...</Row>)}
 </Group>
 ```

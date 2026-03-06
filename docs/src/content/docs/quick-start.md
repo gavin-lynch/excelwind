@@ -23,8 +23,8 @@ const workbook = await render(
   <Workbook>
     <Worksheet name="Sheet1">
       <Row>
-        <Cell value="Hello" />
-        <Cell value="World" />
+        <Cell value="Hello" className="font-bold" />
+        <Cell value="World" className="text-right" />
       </Row>
     </Worksheet>
   </Workbook>
@@ -34,6 +34,6 @@ await Bun.write("hello.xlsx", await workbook.xlsx.writeBuffer());
 ```
 
 ## 4. Next steps
-- Add styles using `tailwindExcel`
+- Add styles using `className`
 - Extract repeated sections into components
 - Use processors to apply conditional styling

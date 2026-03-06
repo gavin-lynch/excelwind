@@ -7,7 +7,7 @@ Excelwind lets you generate Excel files using JSX syntax and Tailwind-style clas
 
 ## What you get
 - Declarative JSX for worksheets, rows, and cells
-- Tailwind-style utility classes via `tailwindExcel`
+- Tailwind-style utility classes via `className` or `excelwindClasses`
 - Templates that load existing Excel files
 - Images, named ranges, and processors for advanced layouts
 
@@ -20,14 +20,14 @@ bun add @workspace/excelwind
 ```tsx
 /** @jsxImportSource @workspace/excelwind */
 import { Workbook, Worksheet, Row, Cell } from "@workspace/excelwind";
-import { render, tailwindExcel } from "@workspace/excelwind";
+import { render } from "@workspace/excelwind";
 
 const spreadsheet = (
   <Workbook>
     <Worksheet name="Sales">
       <Row>
-        <Cell value="Product" style={tailwindExcel("font-bold bg-blue-600 text-white")} />
-        <Cell value="Revenue" style={tailwindExcel("font-bold bg-blue-600 text-white")} />
+        <Cell value="Product" className="font-bold bg-blue-600 text-white" />
+        <Cell value="Revenue" className="font-bold bg-blue-600 text-white" />
       </Row>
       <Row>
         <Cell value="Widget Pro" />

@@ -20,30 +20,30 @@ Defines a worksheet in the workbook.
 ## Column
 Configures column width, format, or named ranges.
 ```tsx
-<Column width={20} format='"$"#,##0.00' />
-<Column id="Dates" width={15} format="yyyy-mm-dd" />
+<Column width={20} format='"$"#,##0.00' className="text-right" />
+<Column id="Dates" width={15} format="yyyy-mm-dd" className="text-center" />
 ```
 
 ## Row
 Defines a row of cells.
 ```tsx
-<Row height={24}>
-  <Cell value="Hello" />
+<Row height={24} className="bg-gray-50">
+  <Cell value="Hello" className="font-bold" />
 </Row>
 ```
 
 ## Cell
 Individual cell with value, format, spans, and optional images.
 ```tsx
-<Cell value="Text" />
-<Cell value={123} format='"$"#,##0.00' />
-<Cell value="Merged" colSpan={2} rowSpan={2} />
+<Cell value="Text" className="text-left" />
+<Cell value={123} format='"$"#,##0.00' className="text-right" />
+<Cell value="Merged" colSpan={2} rowSpan={2} className="text-center" />
 ```
 
 ## Group
 Group rows or cells to share styles or processors.
 ```tsx
-<Group style={tailwindExcel("bg-gray-100")}>...
+<Group className="bg-gray-100">...
 </Group>
 ```
 

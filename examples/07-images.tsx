@@ -12,7 +12,6 @@
 
 import { Workbook, Worksheet, Row, Cell, Column, Image } from "../src/components";
 import { renderToWorkbook as render } from "../src/renderRows";
-import { tailwindExcel } from "../src/tailwind";
 import { writeFile } from "fs/promises";
 
 // A small sample PNG image encoded as base64 (a simple icon)
@@ -33,16 +32,16 @@ const workbook = (
         <Cell
           value="Product Catalog with Images"
           colSpan={4}
-          style={tailwindExcel("font-bold text-xl text-center align-center bg-purple-700 text-white")}
+          className="font-bold text-xl text-center align-center bg-purple-700 text-white"
         />
       </Row>
 
       {/* Column headers */}
       <Row height={25}>
-        <Cell value="Image" style={tailwindExcel("font-bold bg-gray-200 text-center")} />
-        <Cell value="Product Name" style={tailwindExcel("font-bold bg-gray-200 text-center")} />
-        <Cell value="Description" style={tailwindExcel("font-bold bg-gray-200 text-center")} />
-        <Cell value="Price" style={tailwindExcel("font-bold bg-gray-200 text-center")} />
+        <Cell value="Image" className="font-bold bg-gray-200 text-center" />
+        <Cell value="Product Name" className="font-bold bg-gray-200 text-center" />
+        <Cell value="Description" className="font-bold bg-gray-200 text-center" />
+        <Cell value="Price" className="font-bold bg-gray-200 text-center" />
       </Row>
 
       {/* Product 1 - Image from base64 */}
@@ -58,12 +57,12 @@ const workbook = (
             tooltip="Product thumbnail"
           />
         </Cell>
-        <Cell value="Premium Widget" style={tailwindExcel("font-bold align-center")} />
+        <Cell value="Premium Widget" className="font-bold align-center" />
         <Cell
           value="High-quality widget with advanced features. Perfect for enterprise use."
-          style={tailwindExcel("align-center text-nowrap")}
+          className="align-center text-nowrap"
         />
-        <Cell value="$299.99" style={tailwindExcel("align-center text-right")} />
+        <Cell value="$299.99" className="align-center text-right" />
       </Row>
 
       {/* Product 2 - Image from file (if exists) */}
@@ -79,12 +78,12 @@ const workbook = (
             tooltip="Gadget image"
           />
         </Cell>
-        <Cell value="Super Gadget" style={tailwindExcel("font-bold align-center")} />
+        <Cell value="Super Gadget" className="font-bold align-center" />
         <Cell
           value="Revolutionary gadget that simplifies complex tasks. Industry leading performance."
-          style={tailwindExcel("align-center text-nowrap")}
+          className="align-center text-nowrap"
         />
-        <Cell value="$149.99" style={tailwindExcel("align-center text-right")} />
+        <Cell value="$149.99" className="align-center text-right" />
       </Row>
 
       {/* Product 3 */}
@@ -100,12 +99,12 @@ const workbook = (
             tooltip="Component icon"
           />
         </Cell>
-        <Cell value="Essential Component" style={tailwindExcel("font-bold align-center")} />
+        <Cell value="Essential Component" className="font-bold align-center" />
         <Cell
           value="The backbone of any modern system. Reliable and tested."
-          style={tailwindExcel("align-center text-nowrap")}
+          className="align-center text-nowrap"
         />
-        <Cell value="$49.99" style={tailwindExcel("align-center text-right")} />
+        <Cell value="$49.99" className="align-center text-right" />
       </Row>
 
       {/* Footer */}
@@ -113,7 +112,7 @@ const workbook = (
         <Cell
           value="Images can be embedded from files or base64 encoded data"
           colSpan={4}
-          style={tailwindExcel("text-center text-gray-500 text-sm")}
+          className="text-center text-gray-500 text-sm"
         />
       </Row>
     </Worksheet>

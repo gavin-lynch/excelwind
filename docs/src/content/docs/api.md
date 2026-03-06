@@ -5,7 +5,7 @@ description: Public exports and core types.
 
 ## Main exports
 - `render(root)` -> returns an `ExcelJS.Workbook`
-- `tailwindExcel(classString)` -> returns a partial ExcelJS style
+- `excelwindClasses(classString)` -> returns a partial ExcelJS style
 - Components: `Workbook`, `Worksheet`, `Column`, `Row`, `Cell`, `Group`, `Image`, `Template`
 - Utilities: `mergeDeep`, `isRow`, `isCell`, `isGroup`, `isColumn`, `isImage`, `isWorksheet`, `isWorkbook`
 
@@ -17,3 +17,4 @@ description: Public exports and core types.
 ## Render contract
 - The JSX tree is validated before render.
 - `render` returns a workbook you can write via ExcelJS.
+- `className` is the canonical styling prop for `Column`, `Group`, `Row`, and `Cell`.

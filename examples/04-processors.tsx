@@ -14,7 +14,6 @@
 
 import { Workbook, Worksheet, Row, Cell, Column, Group } from "../src/components";
 import { renderToWorkbook as render } from "../src/renderRows";
-import { tailwindExcel } from "../src/tailwind";
 import { mergeDeep, isRow } from "../src/utils";
 import type { Processor, AnyNode, ProcessorContext } from "../src/types";
 import { writeFile } from "fs/promises";
@@ -88,13 +87,13 @@ const workbook = (
         <Cell
           value="Inventory Management"
           colSpan={6}
-          style={tailwindExcel("font-bold text-xl text-center align-center bg-emerald-600 text-white")}
+          className="font-bold text-xl text-center align-center bg-emerald-600 text-white"
         />
       </Row>
 
       {/* Header Row */}
       <Row height={28}>
-        <Group style={tailwindExcel("font-bold bg-gray-800 text-white text-center align-center")}>
+        <Group className="font-bold bg-gray-800 text-white text-center align-center">
           <Cell value="SKU" />
           <Cell value="Product Name" />
           <Cell value="Quantity" />
@@ -108,19 +107,21 @@ const workbook = (
       <Group processor={zebraStripeProcessor}>
         {inventory.map((item) => (
           <Row height={24}>
-            <Cell value={item.sku} style={tailwindExcel("font-bold")} />
+            <Cell value={item.sku} className="font-bold" />
             <Cell value={item.name} />
             <Cell
               value={item.quantity}
-              style={tailwindExcel(
-                item.quantity <= item.reorderPoint ? "text-red-600 font-bold text-center" : "text-center"
-              )}
+              className={
+                item.quantity <= item.reorderPoint
+                  ? "text-red-600 font-bold text-center"
+                  : "text-center"
+              }
             />
-            <Cell value={item.reorderPoint} style={tailwindExcel("text-center")} />
+            <Cell value={item.reorderPoint} className="text-center" />
             <Cell value={item.price} />
             <Cell
               value={getStockStatus(item.quantity, item.reorderPoint)}
-              style={tailwindExcel(`text-center ${getStockStyle(item.quantity, item.reorderPoint)}`)}
+              className={`text-center ${getStockStyle(item.quantity, item.reorderPoint)}`}
             />
           </Row>
         ))}
@@ -132,10 +133,10 @@ const workbook = (
       </Row>
 
       <Row height={20}>
-        <Cell value="Legend:" style={tailwindExcel("font-bold")} />
-        <Cell value="OK" style={tailwindExcel("bg-green-100 text-green-800 text-center")} />
-        <Cell value="LOW" style={tailwindExcel("bg-yellow-100 text-yellow-800 text-center")} />
-        <Cell value="CRITICAL" style={tailwindExcel("bg-red-100 text-red-800 text-center")} />
+        <Cell value="Legend:" className="font-bold" />
+        <Cell value="OK" className="bg-green-100 text-green-800 text-center" />
+        <Cell value="LOW" className="bg-yellow-100 text-yellow-800 text-center" />
+        <Cell value="CRITICAL" className="bg-red-100 text-red-800 text-center" />
         <Cell value="" colSpan={2} />
       </Row>
     </Worksheet>

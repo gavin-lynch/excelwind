@@ -3,7 +3,7 @@ title: Formula
 description: Cell formulas and cached results.
 ---
 
-Formulas are not part of `tailwindExcel`. Use the `formula` prop on `<Cell>`.
+Formulas are not part of `excelwindClasses`. Use the `formula` prop on `<Cell>`.
 
 ```tsx
 <Cell formula="SUM(B2:B10)" value={1234} />

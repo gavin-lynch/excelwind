@@ -1,9 +1,9 @@
 ---
 title: Properties
-description: Style properties mapped by tailwindExcel.
+description: Style properties mapped by excelwindClasses.
 ---
 
-`tailwindExcel` maps utility classes into an ExcelJS `Style` object. It only sets the properties listed below.
+`className` is the canonical styling prop. Internally, `excelwindClasses` maps utility classes into an ExcelJS `Style` object. It only sets the properties listed below.
 
 ## Mapped style properties
 - `font.size`
@@ -22,4 +22,4 @@ description: Style properties mapped by tailwindExcel.
 
 ## Default behavior
 - If a property is not set by a class, ExcelJS defaults apply.
-- `tailwindExcel` never sets `numFmt`; use the `format` prop instead.
+- `excelwindClasses` never sets `numFmt`; use the `format` prop instead.

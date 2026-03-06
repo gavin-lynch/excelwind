@@ -98,7 +98,7 @@ const borderSideMap: Record<string, BorderSide[]> = {
 };
 
 // --- Main Function ---
-export function tailwindExcel(classString: string): Partial<Style> {
+export function excelwindClasses(classString: string): Partial<Style> {
   const classes = classString.split(' ').filter(Boolean);
   const style: Partial<Style> = {};
 
@@ -189,7 +189,7 @@ export function tailwindExcel(classString: string): Partial<Style> {
     }
     // If not recognized by any parser, throw an error
     if (!recognized) {
-      throw new Error(`[tailwindExcel] Unknown or unsupported class: '${cls}'`);
+      throw new Error(`[excelwindClasses] Unknown or unsupported class: '${cls}'`);
     }
   }
 

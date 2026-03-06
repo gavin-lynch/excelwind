@@ -12,7 +12,6 @@
 
 import { Workbook, Worksheet, Row, Cell, Column, Group } from "../src/components";
 import { renderToWorkbook as render } from "../src/renderRows";
-import { tailwindExcel } from "../src/tailwind";
 import { writeFile } from "fs/promises";
 
 // Sample employee data
@@ -39,7 +38,7 @@ const workbook = (
 
       {/* Header Row */}
       <Row height={30}>
-        <Group style={tailwindExcel("font-bold text-white bg-indigo-600 text-center align-center")}>
+        <Group className="font-bold text-white bg-indigo-600 text-center align-center">
           <Cell value="ID" />
           <Cell value="Employee Name" />
           <Cell value="Department" />
@@ -51,8 +50,8 @@ const workbook = (
       {/* Dynamic data rows */}
       {employees.map((emp, index) => (
         <Row height={22}>
-          <Group style={tailwindExcel(index % 2 === 0 ? "" : "bg-gray-50")}>
-            <Cell value={emp.id} style={tailwindExcel("text-center")} />
+          <Group className={index % 2 === 0 ? "" : "bg-gray-50"}>
+            <Cell value={emp.id} className="text-center" />
             <Cell value={emp.name} />
             <Cell value={emp.department} />
             <Cell value={emp.startDate} />
@@ -68,27 +67,27 @@ const workbook = (
 
       <Row height={25}>
         <Cell value="" colSpan={2} />
-        <Cell value="Total Employees:" style={tailwindExcel("font-bold text-right")} />
-        <Cell value={employees.length} style={tailwindExcel("font-bold text-center bg-indigo-100")} />
+        <Cell value="Total Employees:" className="font-bold text-right" />
+        <Cell value={employees.length} className="font-bold text-center bg-indigo-100" />
         <Cell value="" />
       </Row>
 
       <Row height={25}>
         <Cell value="" colSpan={2} />
-        <Cell value="Total Salaries:" style={tailwindExcel("font-bold text-right")} />
+        <Cell value="Total Salaries:" className="font-bold text-right" />
         <Cell
           formula="SUM(Salaries)"
-          style={tailwindExcel("font-bold bg-green-100 text-green-800")}
+          className="font-bold bg-green-100 text-green-800"
         />
         <Cell value="" />
       </Row>
 
       <Row height={25}>
         <Cell value="" colSpan={2} />
-        <Cell value="Average Salary:" style={tailwindExcel("font-bold text-right")} />
+        <Cell value="Average Salary:" className="font-bold text-right" />
         <Cell
           formula="AVERAGE(Salaries)"
-          style={tailwindExcel("font-bold bg-blue-100 text-blue-800")}
+          className="font-bold bg-blue-100 text-blue-800"
         />
         <Cell value="" />
       </Row>
