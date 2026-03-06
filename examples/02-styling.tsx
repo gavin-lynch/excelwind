@@ -14,13 +14,13 @@
  * Run: bun run example:styling
  */
 
-import { Workbook, Worksheet, Row, Cell, Column, Group } from "../src/components";
-import { renderToWorkbook as render } from "../src/renderRows";
-import { writeFile } from "fs/promises";
+import { Workbook, Worksheet, Row, Cell, Column, Group } from '../src/components';
+import { renderToWorkbook as render } from '../src/renderRows';
+import { writeFile } from 'node:fs/promises';
 
 const workbook = (
   <Workbook>
-    <Worksheet name="Styled Report" properties={{ tabColor: { argb: "4F46E5" } }}>
+    <Worksheet name="Styled Report" properties={{ tabColor: { argb: '4F46E5' } }}>
       {/* Column definitions */}
       <Column width={15} />
       <Column width={20} />
@@ -90,10 +90,7 @@ const workbook = (
         <Cell value="" />
         <Cell value="" />
         <Cell value="TOTAL" className="font-bold text-right" />
-        <Cell
-          value={469000}
-          className="font-bold text-right bg-blue-100 border border-blue-500"
-        />
+        <Cell value={469000} className="font-bold text-right bg-blue-100 border border-blue-500" />
         <Cell value="" />
       </Row>
 
@@ -111,6 +108,6 @@ const workbook = (
 
 render(workbook).then(async (wb) => {
   const buffer = await wb.xlsx.writeBuffer();
-  await writeFile("examples/output/02-styling.xlsx", Buffer.from(buffer));
-  console.log("✅ Created examples/output/02-styling.xlsx");
+  await writeFile('examples/output/02-styling.xlsx', Buffer.from(buffer));
+  console.log('✅ Created examples/output/02-styling.xlsx');
 });

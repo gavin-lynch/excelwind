@@ -76,22 +76,22 @@ function renderRow(rowNode: RowNode, context: RenderContext) {
   ) {
     if (!children) return;
     const childrenArray = Array.isArray(children) ? children : [children];
-      childrenArray.forEach((child) => {
-        if (!child || !('type' in child)) return;
-        if (isGroup(child)) {
-          const groupClassStyle = classNameToStyle(child.props.className);
-          const groupStyle = mergeDeep(inheritedStyle, groupClassStyle, child.props.style);
-          const groupFormat = child.props.format || inheritedFormat;
-          flatten(child.props.children, groupStyle, groupFormat);
-        } else if (isCell(child)) {
-          const cellClassStyle = classNameToStyle(child.props.className);
-          const finalCellStyle = mergeDeep(inheritedStyle, cellClassStyle, child.props.style);
-          allCells.push({
-            node: { ...child, props: { ...child.props, style: finalCellStyle } },
-            groupFormat: inheritedFormat,
-          });
-        }
-      });
+    childrenArray.forEach((child) => {
+      if (!child || !('type' in child)) return;
+      if (isGroup(child)) {
+        const groupClassStyle = classNameToStyle(child.props.className);
+        const groupStyle = mergeDeep(inheritedStyle, groupClassStyle, child.props.style);
+        const groupFormat = child.props.format || inheritedFormat;
+        flatten(child.props.children, groupStyle, groupFormat);
+      } else if (isCell(child)) {
+        const cellClassStyle = classNameToStyle(child.props.className);
+        const finalCellStyle = mergeDeep(inheritedStyle, cellClassStyle, child.props.style);
+        allCells.push({
+          node: { ...child, props: { ...child.props, style: finalCellStyle } },
+          groupFormat: inheritedFormat,
+        });
+      }
+    });
   }
 
   if ('children' in props) {

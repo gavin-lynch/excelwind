@@ -15,35 +15,35 @@ import {
   TemplateProps,
   ImageNode,
   TemplateNode,
-} from "./types";
-import { readFileSync } from "fs";
+} from './types';
+import { readFileSync } from 'node:fs';
 
 export function Workbook(props: WorkbookProps): WorkbookNode {
-  return { type: "Workbook", props };
+  return { type: 'Workbook', props };
 }
 
 export function Worksheet(props: WorksheetProps): WorksheetNode {
-  return { type: "Worksheet", props };
+  return { type: 'Worksheet', props };
 }
 
 export function Group(props: GroupProps): GroupNode {
-  return { type: "Group", props };
+  return { type: 'Group', props };
 }
 
 export function Column(props: ColumnProps): ColumnNode {
-  return { type: "Column", props };
+  return { type: 'Column', props };
 }
 
 export function Row(props: RowProps): RowNode {
-  return { type: "Row", props };
+  return { type: 'Row', props };
 }
 
 export function Cell(props: CellProps): CellNode {
-  return { type: "Cell", props };
+  return { type: 'Cell', props };
 }
 
 export function Template(props: TemplateProps): TemplateNode {
-  return { type: "Template", props };
+  return { type: 'Template', props };
 }
 
 export function Image(props: ImageProps): ImageNode {
@@ -51,5 +51,5 @@ export function Image(props: ImageProps): ImageNode {
   if (!buffer && props.src) {
     buffer = readFileSync(props.src);
   }
-  return { type: "Image", props: { ...props, buffer } };
+  return { type: 'Image', props: { ...props, buffer } };
 }

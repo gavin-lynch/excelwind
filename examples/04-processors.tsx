@@ -12,19 +12,16 @@
  * Run: bun run example:processors
  */
 
-import { Workbook, Worksheet, Row, Cell, Column, Group } from "../src/components";
-import { renderToWorkbook as render } from "../src/renderRows";
-import { mergeDeep, isRow } from "../src/utils";
-import type { Processor, AnyNode, ProcessorContext } from "../src/types";
-import { writeFile } from "fs/promises";
+import { Workbook, Worksheet, Row, Cell, Column, Group } from '../src/components';
+import { renderToWorkbook as render } from '../src/renderRows';
+import { mergeDeep, isRow } from '../src/utils';
+import type { Processor, AnyNode, ProcessorContext } from '../src/types';
+import { writeFile } from 'node:fs/promises';
 
 /**
  * Zebra stripe processor - applies alternating background colors to rows
  */
-const zebraStripeProcessor: Processor = (
-  node: AnyNode,
-  context: ProcessorContext
-) => {
+const zebraStripeProcessor: Processor = (node: AnyNode, context: ProcessorContext) => {
   if (!isRow(node) || context.rowIndex === undefined) {
     return node;
   }
@@ -32,9 +29,9 @@ const zebraStripeProcessor: Processor = (
   if (context.rowIndex % 2 !== 0) {
     const newStyle = mergeDeep(node.props.style, {
       fill: {
-        type: "pattern",
-        pattern: "solid",
-        fgColor: { argb: "F3F4F6" }, // Light gray for odd rows
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'F3F4F6' }, // Light gray for odd rows
       },
     });
     return { ...node, props: { ...node.props, style: newStyle } };
@@ -44,36 +41,36 @@ const zebraStripeProcessor: Processor = (
 
 // Sample inventory data
 const inventory = [
-  { sku: "WIDGET-001", name: "Standard Widget", quantity: 150, reorderPoint: 50, price: 12.99 },
-  { sku: "WIDGET-002", name: "Premium Widget", quantity: 25, reorderPoint: 30, price: 24.99 },
-  { sku: "GADGET-001", name: "Basic Gadget", quantity: 200, reorderPoint: 75, price: 8.99 },
-  { sku: "GADGET-002", name: "Advanced Gadget", quantity: 10, reorderPoint: 25, price: 45.99 },
-  { sku: "THING-001", name: "Thing-a-ma-jig", quantity: 500, reorderPoint: 100, price: 3.99 },
-  { sku: "THING-002", name: "Whatchamacallit", quantity: 5, reorderPoint: 20, price: 15.99 },
-  { sku: "DOODAD-001", name: "Simple Doodad", quantity: 75, reorderPoint: 40, price: 7.49 },
-  { sku: "DOODAD-002", name: "Complex Doodad", quantity: 45, reorderPoint: 30, price: 29.99 },
+  { sku: 'WIDGET-001', name: 'Standard Widget', quantity: 150, reorderPoint: 50, price: 12.99 },
+  { sku: 'WIDGET-002', name: 'Premium Widget', quantity: 25, reorderPoint: 30, price: 24.99 },
+  { sku: 'GADGET-001', name: 'Basic Gadget', quantity: 200, reorderPoint: 75, price: 8.99 },
+  { sku: 'GADGET-002', name: 'Advanced Gadget', quantity: 10, reorderPoint: 25, price: 45.99 },
+  { sku: 'THING-001', name: 'Thing-a-ma-jig', quantity: 500, reorderPoint: 100, price: 3.99 },
+  { sku: 'THING-002', name: 'Whatchamacallit', quantity: 5, reorderPoint: 20, price: 15.99 },
+  { sku: 'DOODAD-001', name: 'Simple Doodad', quantity: 75, reorderPoint: 40, price: 7.49 },
+  { sku: 'DOODAD-002', name: 'Complex Doodad', quantity: 45, reorderPoint: 30, price: 29.99 },
 ];
 
 // Helper to determine stock status style
 function getStockStyle(quantity: number, reorderPoint: number): string {
   if (quantity <= reorderPoint * 0.5) {
-    return "bg-red-100 text-red-800 font-bold"; // Critical
+    return 'bg-red-100 text-red-800 font-bold'; // Critical
   }
   if (quantity <= reorderPoint) {
-    return "bg-yellow-100 text-yellow-800"; // Low
+    return 'bg-yellow-100 text-yellow-800'; // Low
   }
-  return "bg-green-100 text-green-800"; // Good
+  return 'bg-green-100 text-green-800'; // Good
 }
 
 function getStockStatus(quantity: number, reorderPoint: number): string {
-  if (quantity <= reorderPoint * 0.5) return "CRITICAL";
-  if (quantity <= reorderPoint) return "LOW";
-  return "OK";
+  if (quantity <= reorderPoint * 0.5) return 'CRITICAL';
+  if (quantity <= reorderPoint) return 'LOW';
+  return 'OK';
 }
 
 const workbook = (
   <Workbook>
-    <Worksheet name="Inventory" properties={{ tabColor: { argb: "059669" } }}>
+    <Worksheet name="Inventory" properties={{ tabColor: { argb: '059669' } }}>
       {/* Column definitions */}
       <Column width={15} />
       <Column width={25} />
@@ -113,8 +110,8 @@ const workbook = (
               value={item.quantity}
               className={
                 item.quantity <= item.reorderPoint
-                  ? "text-red-600 font-bold text-center"
-                  : "text-center"
+                  ? 'text-red-600 font-bold text-center'
+                  : 'text-center'
               }
             />
             <Cell value={item.reorderPoint} className="text-center" />
@@ -145,6 +142,6 @@ const workbook = (
 
 render(workbook).then(async (wb) => {
   const buffer = await wb.xlsx.writeBuffer();
-  await writeFile("examples/output/04-processors.xlsx", Buffer.from(buffer));
-  console.log("✅ Created examples/output/04-processors.xlsx");
+  await writeFile('examples/output/04-processors.xlsx', Buffer.from(buffer));
+  console.log('✅ Created examples/output/04-processors.xlsx');
 });

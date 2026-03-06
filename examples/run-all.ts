@@ -5,21 +5,21 @@
  * Run: bun run examples
  */
 
-import { spawn } from "child_process";
-import { readdir } from "fs/promises";
-import { join } from "path";
+import { spawn } from 'node:child_process';
+import { readdir } from 'node:fs/promises';
+import { join } from 'node:path';
 
-const examplesDir = new URL(".", import.meta.url).pathname;
+const examplesDir = new URL('.', import.meta.url).pathname;
 
 async function runExample(file: string): Promise<void> {
   return new Promise((resolve, reject) => {
     console.log(`\n📄 Running ${file}...`);
-    const proc = spawn("bun", ["run", join(examplesDir, file)], {
-      stdio: "inherit",
-      cwd: join(examplesDir, ".."),
+    const proc = spawn('bun', ['run', join(examplesDir, file)], {
+      stdio: 'inherit',
+      cwd: join(examplesDir, '..'),
     });
 
-    proc.on("close", (code) => {
+    proc.on('close', (code) => {
       if (code === 0) {
         resolve();
       } else {
@@ -30,12 +30,10 @@ async function runExample(file: string): Promise<void> {
 }
 
 async function main() {
-  console.log("🚀 Running all Excelwind examples...\n");
+  console.log('🚀 Running all Excelwind examples...\n');
 
   const files = await readdir(examplesDir);
-  const examples = files
-    .filter((f) => f.endsWith(".tsx") && f.match(/^\d{2}-/))
-    .sort();
+  const examples = files.filter((f) => f.endsWith('.tsx') && f.match(/^\d{2}-/)).sort();
 
   console.log(`Found ${examples.length} examples to run:`);
   examples.forEach((e) => console.log(`  - ${e}`));
@@ -48,8 +46,8 @@ async function main() {
     }
   }
 
-  console.log("\n✨ All examples completed!");
-  console.log("📁 Output files are in: examples/output/");
+  console.log('\n✨ All examples completed!');
+  console.log('📁 Output files are in: examples/output/');
 }
 
 main().catch(console.error);

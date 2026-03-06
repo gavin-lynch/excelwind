@@ -10,20 +10,62 @@
  * Run: bun run example:dynamic
  */
 
-import { Workbook, Worksheet, Row, Cell, Column, Group } from "../src/components";
-import { renderToWorkbook as render } from "../src/renderRows";
-import { writeFile } from "fs/promises";
+import { Workbook, Worksheet, Row, Cell, Column, Group } from '../src/components';
+import { renderToWorkbook as render } from '../src/renderRows';
+import { writeFile } from 'node:fs/promises';
 
 // Sample employee data
 const employees = [
-  { id: 1, name: "Alice Johnson", department: "Engineering", startDate: new Date(2021, 2, 15), salary: 95000 },
-  { id: 2, name: "Bob Smith", department: "Sales", startDate: new Date(2020, 6, 1), salary: 75000 },
-  { id: 3, name: "Carol Davis", department: "Marketing", startDate: new Date(2022, 0, 10), salary: 82000 },
-  { id: 4, name: "Dan Wilson", department: "Engineering", startDate: new Date(2019, 11, 5), salary: 110000 },
-  { id: 5, name: "Eve Martinez", department: "HR", startDate: new Date(2023, 3, 20), salary: 68000 },
-  { id: 6, name: "Frank Lee", department: "Engineering", startDate: new Date(2021, 8, 12), salary: 92000 },
-  { id: 7, name: "Grace Chen", department: "Sales", startDate: new Date(2022, 5, 30), salary: 78000 },
-  { id: 8, name: "Henry Brown", department: "Marketing", startDate: new Date(2020, 1, 14), salary: 85000 },
+  {
+    id: 1,
+    name: 'Alice Johnson',
+    department: 'Engineering',
+    startDate: new Date(2021, 2, 15),
+    salary: 95000,
+  },
+  { id: 2, name: 'Bob Smith', department: 'Sales', startDate: new Date(2020, 6, 1), salary: 75000 },
+  {
+    id: 3,
+    name: 'Carol Davis',
+    department: 'Marketing',
+    startDate: new Date(2022, 0, 10),
+    salary: 82000,
+  },
+  {
+    id: 4,
+    name: 'Dan Wilson',
+    department: 'Engineering',
+    startDate: new Date(2019, 11, 5),
+    salary: 110000,
+  },
+  {
+    id: 5,
+    name: 'Eve Martinez',
+    department: 'HR',
+    startDate: new Date(2023, 3, 20),
+    salary: 68000,
+  },
+  {
+    id: 6,
+    name: 'Frank Lee',
+    department: 'Engineering',
+    startDate: new Date(2021, 8, 12),
+    salary: 92000,
+  },
+  {
+    id: 7,
+    name: 'Grace Chen',
+    department: 'Sales',
+    startDate: new Date(2022, 5, 30),
+    salary: 78000,
+  },
+  {
+    id: 8,
+    name: 'Henry Brown',
+    department: 'Marketing',
+    startDate: new Date(2020, 1, 14),
+    salary: 85000,
+  },
 ];
 
 const workbook = (
@@ -50,7 +92,7 @@ const workbook = (
       {/* Dynamic data rows */}
       {employees.map((emp, index) => (
         <Row height={22}>
-          <Group className={index % 2 === 0 ? "" : "bg-gray-50"}>
+          <Group className={index % 2 === 0 ? '' : 'bg-gray-50'}>
             <Cell value={emp.id} className="text-center" />
             <Cell value={emp.name} />
             <Cell value={emp.department} />
@@ -75,20 +117,14 @@ const workbook = (
       <Row height={25}>
         <Cell value="" colSpan={2} />
         <Cell value="Total Salaries:" className="font-bold text-right" />
-        <Cell
-          formula="SUM(Salaries)"
-          className="font-bold bg-green-100 text-green-800"
-        />
+        <Cell formula="SUM(Salaries)" className="font-bold bg-green-100 text-green-800" />
         <Cell value="" />
       </Row>
 
       <Row height={25}>
         <Cell value="" colSpan={2} />
         <Cell value="Average Salary:" className="font-bold text-right" />
-        <Cell
-          formula="AVERAGE(Salaries)"
-          className="font-bold bg-blue-100 text-blue-800"
-        />
+        <Cell formula="AVERAGE(Salaries)" className="font-bold bg-blue-100 text-blue-800" />
         <Cell value="" />
       </Row>
     </Worksheet>
@@ -97,6 +133,6 @@ const workbook = (
 
 render(workbook).then(async (wb) => {
   const buffer = await wb.xlsx.writeBuffer();
-  await writeFile("examples/output/03-dynamic-data.xlsx", Buffer.from(buffer));
-  console.log("✅ Created examples/output/03-dynamic-data.xlsx");
+  await writeFile('examples/output/03-dynamic-data.xlsx', Buffer.from(buffer));
+  console.log('✅ Created examples/output/03-dynamic-data.xlsx');
 });

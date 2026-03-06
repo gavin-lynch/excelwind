@@ -14,44 +14,44 @@
  * Run: bun run example:templates
  */
 
-import { Workbook, Worksheet, Row, Cell, Column, Template, Group } from "../src/components";
-import { renderToWorkbook as render } from "../src/renderRows";
-import { writeFile } from "fs/promises";
+import { Workbook, Worksheet, Row, Cell, Template, Group } from '../src/components';
+import { renderToWorkbook as render } from '../src/renderRows';
+import { writeFile } from 'node:fs/promises';
 
 // Sample invoice data
 const invoiceData = {
   vendor: {
-    name: "Acme Corporation",
-    address: "123 Business Ave, Suite 100",
-    mail: "billing@acme.com",
+    name: 'Acme Corporation',
+    address: '123 Business Ave, Suite 100',
+    mail: 'billing@acme.com',
   },
   buyer: {
-    name: "Customer Inc",
-    address: "456 Client Street",
-    tel: "555-0123",
-    mail: "orders@customer.com",
+    name: 'Customer Inc',
+    address: '456 Client Street',
+    tel: '555-0123',
+    mail: 'orders@customer.com',
   },
   columns: [
-    { id: "itemNumber", names: ["No."] },
-    { id: "orderNumber", names: ["Order #"] },
-    { id: "partNumber", names: ["Part #"] },
-    { id: "description", names: ["Description"] },
-    { id: "palletNumber", names: ["Pallet #"] },
-    { id: "cbmPerPallet", names: ["CBM Per Pallet"] },
-    { id: "quantityPcs", names: ["Quantity"] },
-    { id: "pcsPerSet", names: ["Pcs/Set"] },
-    { id: "quantityPerCarton", names: ["Qty/Carton"] },
-    { id: "cartons", names: ["Cartons"] },
-    { id: "netWeightPerPiece", names: ["N.W. Each"] },
-    { id: "totalNetWeight", names: ["Total N.W."] },
-    { id: "grossWeight", names: ["Gross Wt."] },
+    { id: 'itemNumber', names: ['No.'] },
+    { id: 'orderNumber', names: ['Order #'] },
+    { id: 'partNumber', names: ['Part #'] },
+    { id: 'description', names: ['Description'] },
+    { id: 'palletNumber', names: ['Pallet #'] },
+    { id: 'cbmPerPallet', names: ['CBM Per Pallet'] },
+    { id: 'quantityPcs', names: ['Quantity'] },
+    { id: 'pcsPerSet', names: ['Pcs/Set'] },
+    { id: 'quantityPerCarton', names: ['Qty/Carton'] },
+    { id: 'cartons', names: ['Cartons'] },
+    { id: 'netWeightPerPiece', names: ['N.W. Each'] },
+    { id: 'totalNetWeight', names: ['Total N.W.'] },
+    { id: 'grossWeight', names: ['Gross Wt.'] },
   ],
   rows: [
     {
-      itemNumber: "1",
-      orderNumber: "ORD-2024-001",
-      partNumber: "P-1001",
-      description: "Industrial Widget",
+      itemNumber: '1',
+      orderNumber: 'ORD-2024-001',
+      partNumber: 'P-1001',
+      description: 'Industrial Widget',
       palletNumber: 1,
       cbmPerPallet: 2.5,
       quantityPcs: 100,
@@ -63,10 +63,10 @@ const invoiceData = {
       grossWeight: 55,
     },
     {
-      itemNumber: "2",
-      orderNumber: "ORD-2024-001",
-      partNumber: "P-1002",
-      description: "Premium Gadget",
+      itemNumber: '2',
+      orderNumber: 'ORD-2024-001',
+      partNumber: 'P-1002',
+      description: 'Premium Gadget',
       palletNumber: 2,
       cbmPerPallet: 3.0,
       quantityPcs: 200,
@@ -78,10 +78,10 @@ const invoiceData = {
       grossWeight: 130,
     },
     {
-      itemNumber: "3",
-      orderNumber: "ORD-2024-002",
-      partNumber: "P-1003",
-      description: "Standard Component",
+      itemNumber: '3',
+      orderNumber: 'ORD-2024-002',
+      partNumber: 'P-1003',
+      description: 'Standard Component',
       palletNumber: 3,
       cbmPerPallet: 1.8,
       quantityPcs: 150,
@@ -99,10 +99,7 @@ const workbook = (
   <Workbook>
     <Worksheet name="Invoice">
       {/* Use a template file and fill it with data */}
-      <Template
-        src="examples/assets/template-merges.xlsx"
-        data={invoiceData}
-      />
+      <Template src="examples/assets/template-merges.xlsx" data={invoiceData} />
 
       {/* You can add more content after the template */}
       <Row height={30}>
@@ -124,6 +121,6 @@ const workbook = (
 
 render(workbook).then(async (wb) => {
   const buffer = await wb.xlsx.writeBuffer();
-  await writeFile("examples/output/06-templates.xlsx", Buffer.from(buffer));
-  console.log("✅ Created examples/output/06-templates.xlsx");
+  await writeFile('examples/output/06-templates.xlsx', Buffer.from(buffer));
+  console.log('✅ Created examples/output/06-templates.xlsx');
 });

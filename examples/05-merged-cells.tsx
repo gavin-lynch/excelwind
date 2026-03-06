@@ -9,9 +9,9 @@
  * Run: bun run example:merged
  */
 
-import { Workbook, Worksheet, Row, Cell, Column, Group } from "../src/components";
-import { renderToWorkbook as render } from "../src/renderRows";
-import { writeFile } from "fs/promises";
+import { Workbook, Worksheet, Row, Cell, Column, } from '../src/components';
+import { renderToWorkbook as render } from '../src/renderRows';
+import { writeFile } from 'node:fs/promises';
 
 const workbook = (
   <Workbook>
@@ -144,6 +144,6 @@ const workbook = (
 
 render(workbook).then(async (wb) => {
   const buffer = await wb.xlsx.writeBuffer();
-  await writeFile("examples/output/05-merged-cells.xlsx", Buffer.from(buffer));
-  console.log("✅ Created examples/output/05-merged-cells.xlsx");
+  await writeFile('examples/output/05-merged-cells.xlsx', Buffer.from(buffer));
+  console.log('✅ Created examples/output/05-merged-cells.xlsx');
 });
